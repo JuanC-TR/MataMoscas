@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🪰 Mata Moscas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="game-wrapper">
+    <!-- HUD -->
+    <header id="hud">
+      <div class="hud-item">
+        <span class="hud-label">Puntos</span>
+        <span id="score" class="hud-value">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Nivel</span>
+        <span id="level" class="hud-value">1</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Vidas</span>
+        <span id="lives" class="hud-value">❤️❤️❤️</span>
+      </div>
+    </header>
+
+    <!-- Zona de juego -->
+    <main id="board" aria-label="Zona de juego"></main>
+
+    <!-- Barra de progreso del nivel -->
+    <div id="progress-bar"><div id="progress-fill"></div></div>
+
+    <!-- Pantalla de inicio / fin -->
+    <div id="overlay" class="overlay">
+      <div class="overlay-content">
+        <h1 id="overlay-title">🪰 Mata Moscas</h1>
+        <p id="overlay-text">
+          Aplasta los insectos con el matamoscas.<br />
+          Cada insecto aplastado suma puntos.<br />
+          Si golpeas y <b>fallas</b> el aplaste, pierdes una vida.<br />
+          Cada nivel trae insectos distintos: de más chicos a más grandes.
+        </p>
+        <button id="start-btn">Jugar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
