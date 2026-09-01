@@ -1,0 +1,207 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #1f2937;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#game-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 90vh;
+  max-height: 800px;
+  background: linear-gradient(180deg, #bae6fd 0%, #86efac 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+/* HUD */
+#hud {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px;
+  background: rgba(31, 41, 55, 0.85);
+  color: #fff;
+  z-index: 5;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.hud-label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.hud-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Tablero */
+#board {
+  position: relative;
+  flex: 1;
+  cursor: none;
+  overflow: hidden;
+}
+
+/* Matamoscas (cursor) */
+#swatter {
+  position: absolute;
+  font-size: 56px;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-20deg);
+  transition: transform 0.06s ease-out;
+  z-index: 10;
+  will-change: transform;
+}
+
+#swatter.smack {
+  transform: translate(-50%, -50%) rotate(15deg) scale(0.85);
+}
+
+/* Insectos */
+.bug {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: none;
+  transition: transform 0.05s;
+  z-index: 2;
+  animation: wiggle 0.4s infinite alternate ease-in-out;
+}
+
+@keyframes wiggle {
+  from { transform: translate(-50%, -50%) rotate(-8deg); }
+  to   { transform: translate(-50%, -50%) rotate(8deg); }
+}
+
+.bug.hit {
+  animation: none;
+}
+
+/* Efecto de aplaste */
+.splat {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  pointer-events: none;
+  animation: splat-fade 0.5s forwards;
+  z-index: 3;
+}
+
+@keyframes splat-fade {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+}
+
+/* Texto flotante de puntos */
+.floating {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  pointer-events: none;
+  animation: float-up 0.8s forwards;
+  z-index: 4;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.floating.plus { color: #166534; }
+.floating.minus { color: #b91c1c; }
+
+@keyframes float-up {
+  0%   { opacity: 1; transform: translate(-50%, -50%); }
+  100% { opacity: 0; transform: translate(-50%, -120px); }
+}
+
+/* Barra de progreso */
+#progress-bar {
+  height: 8px;
+  background: rgba(31, 41, 55, 0.3);
+}
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #f59e0b;
+  transition: width 0.3s;
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  text-align: center;
+  padding: 24px;
+}
+.overlay.hidden { display: none; }
+
+.overlay-content h1 {
+  color: #fff;
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+.overlay-content p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-size: 16px;
+}
+#start-btn {
+  background: #f59e0b;
+  color: #1f2937;
+  border: none;
+  padding: 14px 40px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+#start-btn:hover { background: #fbbf24; transform: scale(1.05); }
+#start-btn:active { transform: scale(0.97); }
+
+/* Flash de nivel */
+.level-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 44px;
+  font-weight: 900;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 15;
+  animation: banner 1.4s forwards;
+}
+@keyframes banner {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  20%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  80%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
